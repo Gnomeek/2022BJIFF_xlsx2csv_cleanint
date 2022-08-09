@@ -29,6 +29,8 @@ def spreadsheet_to_cls(wb: Workbook):
             if not row[column_num]:
                 break
             month, day = str(row[column_num]).split(".")
+            if day == "2":
+                day = "20"
             t: time = row[column_num + 2]
             movie: Movie = Movie(section=row[1], chn_title=row[2], en_title=row[3], country=row[4], year=row[5],
                                  length=row[6], count=int(row[7]), price=int(row[8]),
