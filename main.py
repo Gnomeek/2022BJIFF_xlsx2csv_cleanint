@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from datetime import datetime, time
+from datetime import datetime, time, timezone, timedelta
 from typing import List
 
 from dataclass_csv import DataclassWriter
@@ -33,8 +33,9 @@ def spreadsheet_to_cls(wb: Workbook):
             movie: Movie = Movie(section=row[1], chn_title=row[2], en_title=row[3], country=row[4], year=row[5],
                                  length=row[6], count=int(row[7]), price=int(row[8]),
                                  screen_location=row[column_num + 3],
-                                 screen_time=str(datetime(year=2022, month=int(month), day=int(day),
-                                                          hour=t.hour, minute=t.minute, second=t.second)))
+                                 screen_time=str(datetime(year=2022, month=int(month), day=int(day), hour=t.hour,
+                                                          minute=t.minute, second=t.second,
+                                                          tzinfo=timezone(offset=timedelta(hours=8)))))
             res.append(movie)
     return res
 
